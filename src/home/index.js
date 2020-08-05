@@ -24,11 +24,11 @@ const Home = () => {
     }
     const fetchGifs = (keyword, offset) => gf.search(keyword, { sort: 'relevant', offset, limit: 8 })
     const fetchMore = async (keyword, offset, gifs) => {
-        setLoading(true)
         if (!keyword) {
             console.log('keyword is empty!')
             return
         }
+        setLoading(true)
         try {
             const { data } = await fetchGifs(keyword, offset)
             setLoading(false)
