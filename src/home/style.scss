@@ -1,0 +1,33 @@
+.tab-item {
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+.gif-wrapper {
+    position: relative;
+    .gif-like-icon {
+        opacity: 0;
+        cursor: pointer;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        bottom: 20px;
+        right: 20px;
+
+        &.active {
+            opacity: 1;
+        }
+
+        &:active,
+        &:focus {
+            opacity: 1 !important;
+            outline: 0;
+        }
+    }
+
+    &:hover {
+        .gif-like-icon {
+            opacity: 0.5;
+        }
+    }
+}

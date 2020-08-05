@@ -1,0 +1,34 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  cd:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USER }} 
+             -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USER }}/giphytest:latest -t ${{ secrets.DOCKER_USER }}/giphytest:${GITHUB_SHA::8} .
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_USER }}/giphytest:latest
+  test:
+    needs: cd
+    runs-on: self-hosted
+    steps:
+      - name: pull image
+        run: docker pull ${{ secrets.DOCKER_USER }}/giphytest
+      - name: docker run
+        run: docker run -it -d -p 6666:80 ${{ secrets.DOCKER_USER }}/giphytest
