@@ -10,9 +10,9 @@ ReactDOM.render(
   <Layout>
     <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
       <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item key="1">Trang chủ</Menu.Item>
-        <Menu.Item key="2">Trang con</Menu.Item>
+        <Menu.Item key="2">Giới thiệu</Menu.Item>
       </Menu>
     </Header>
     <Content className="site-layout" style={{ padding: '0 36px', marginTop: 64 }}>
