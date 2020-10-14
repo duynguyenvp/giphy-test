@@ -24,11 +24,3 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_USER }}/giphytest:latest -t ${{ secrets.DOCKER_USER }}/giphytest:${GITHUB_SHA::8} .
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_USER }}/giphytest:latest
-  test:
-    needs: cd
-    runs-on: self-hosted
-    steps:
-      - name: pull image
-        run: docker pull ${{ secrets.DOCKER_USER }}/giphytest
-      - name: docker run
-        run: docker run -it -d -p 6666:80 ${{ secrets.DOCKER_USER }}/giphytest
